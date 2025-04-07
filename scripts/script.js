@@ -1,5 +1,5 @@
 let isTabVisible = true;
-const canvas = document.getElementById("starfield");
+const canvas = document.querySelector(".starfield");
 const ctx = canvas.getContext("2d");
 
 const width = window.innerWidth;
