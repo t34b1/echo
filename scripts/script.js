@@ -2,12 +2,16 @@ let isTabVisible = true;
 const canvas = document.querySelector(".starfield");
 const ctx = canvas.getContext("2d");
 
-const width = window.innerWidth * devicePixelRatio;
-const height = window.innerHeight * devicePixelRatio;
-const scale = devicePixelRatio;
+const scale = window.devicePixelRatio || 1;
+const width = window.innerWidth;
+const height = window.innerHeight;
+
+canvas.style.width = `${width}px`;
+canvas.style.height = `${height}px`;
 
 canvas.width = width * scale;
 canvas.height = height * scale;
+
 ctx.scale(scale, scale);
 
 canvas.style.backgroundColor = "#FAF9F8";
@@ -54,12 +58,17 @@ setInterval(() => {
   dot.colorData = Object.values(colors)[Math.floor(Math.random() * 5)];
 }, 800);
 
+let frameCount = 0;
+
 // Central animation loop
 function animate() {
-   if (!isTabVisible) {
+  frameCount++;
+  if (frameCount % 2 === 0) return requestAnimationFrame(animate); // Skip every other frame
+
+  if (!isTabVisible) {
     requestAnimationFrame(() => animate());
     return;
-   }  
+  }  
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const now = performance.now();
@@ -84,7 +93,6 @@ function animate() {
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, radius * (5 + pulse), 0, Math.PI * 2);
         ctx.fillStyle = rgba(color, 0.3);
-        ctx.filter = "blur(6px)";
         ctx.fill();
         ctx.closePath();
   
