@@ -2,18 +2,18 @@ let isTabVisible = true;
 const canvas = document.querySelector(".starfield");
 const ctx = canvas.getContext("2d");
 
-const width = window.innerWidth;
-const height = window.innerHeight;
-const scale = window.devicePixelRatio;
+const width = window.innerWidth * devicePixelRatio;
+const height = window.innerHeight * devicePixelRatio;
+const scale = devicePixelRatio;
 
 canvas.width = width * scale;
 canvas.height = height * scale;
 ctx.scale(scale, scale);
 
 canvas.style.backgroundColor = "#FAF9F8";
-const defaultColor = "rgba(240, 238, 237, 1)";
-const radius = 2;
-const spacing = 16;
+const defaultColor = "rgb(241, 240, 240)";
+const radius = 4;
+const spacing = 30;
 
 let columns = Math.floor(width / spacing);
 let rows = Math.floor(height / spacing);
@@ -40,7 +40,7 @@ for (let row = 0; row < rows; row++) {
       active: false,
       colorData: null,
       startTime: null,
-      pulseScale: Math.random() * 0.4 + 1 // range: 0.8 → 1.4
+      pulseScale: Math.random() * 2 + 1, 
 
     });
   }
@@ -52,7 +52,7 @@ setInterval(() => {
   dot.active = true;
   dot.startTime = performance.now();
   dot.colorData = Object.values(colors)[Math.floor(Math.random() * 5)];
-}, 900);
+}, 800);
 
 // Central animation loop
 function animate() {
@@ -71,7 +71,7 @@ function animate() {
     if (isActive) {
       let elapsed = now - dot.startTime;
   
-      if (elapsed > duration * 2) {
+      if (elapsed > duration) {
         dot.active = false;
         dot.colorData = null;
         dot.startTime = null;
@@ -84,14 +84,14 @@ function animate() {
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, radius * (5 + pulse), 0, Math.PI * 2);
         ctx.fillStyle = rgba(color, 0.3);
-        ctx.filter = "blur(2px)";
+        ctx.filter = "blur(6px)";
         ctx.fill();
         ctx.closePath();
   
         // Middle layer
         ctx.beginPath();
         ctx.arc(dot.x, dot.y, radius * (3.5 + pulse), 0, Math.PI * 2);
-        ctx.fillStyle = rgba(color, 0.6);
+        ctx.fillStyle = rgba(color, 0.7);
         ctx.fill();
         ctx.closePath();
       }
@@ -99,7 +99,7 @@ function animate() {
   
     // Base dot
     const color = isActive && dot.colorData ? rgba(dot.colorData, 1) : defaultColor;
-    const size = isActive && dot.colorData ? radius * 1.5 : radius;
+    const size = isActive && dot.colorData ? radius * 2 : radius;
     const blur = isActive && dot.colorData ? "blur(2px)" : "none";
   
     ctx.beginPath();
