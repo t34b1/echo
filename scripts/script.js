@@ -2,22 +2,22 @@ let isTabVisible = true;
 const canvas = document.querySelector(".starfield");
 const ctx = canvas.getContext("2d");
 
-const scale = window.devicePixelRatio || 1;
 const width = window.innerWidth;
-const height = window.innerHeight;
+const height = window.visualViewport?.height || window.innerHeight;
+const scale = window.devicePixelRatio || 1;
 
 canvas.style.width = `${width}px`;
 canvas.style.height = `${height}px`;
-
 canvas.width = width * scale;
 canvas.height = height * scale;
 
+ctx.setTransform(1, 0, 0, 1, 0, 0); // reset transform just in case
 ctx.scale(scale, scale);
 
 canvas.style.backgroundColor = "#FAF9F8";
-const defaultColor = "rgb(241, 240, 240)";
+const defaultColor = "rgba(230, 228, 228, 0.5)";
 const radius = 4;
-const spacing = 30;
+const spacing = 26;
 
 let columns = Math.floor(width / spacing);
 let rows = Math.floor(height / spacing);
@@ -44,7 +44,7 @@ for (let row = 0; row < rows; row++) {
       active: false,
       colorData: null,
       startTime: null,
-      pulseScale: Math.random() * 2 + 1, 
+      pulseScale: Math.random() * 1.5 + 1, 
 
     });
   }
@@ -56,7 +56,7 @@ setInterval(() => {
   dot.active = true;
   dot.startTime = performance.now();
   dot.colorData = Object.values(colors)[Math.floor(Math.random() * 5)];
-}, 800);
+}, 750);
 
 let frameCount = 0;
 
@@ -91,15 +91,15 @@ function animate() {
   
         // Glow layer
         ctx.beginPath();
-        ctx.arc(dot.x, dot.y, radius * (5 + pulse), 0, Math.PI * 2);
+        ctx.arc(dot.x, dot.y, radius * (2.5 + pulse), 0, Math.PI * 2);
         ctx.fillStyle = rgba(color, 0.3);
         ctx.fill();
         ctx.closePath();
   
         // Middle layer
         ctx.beginPath();
-        ctx.arc(dot.x, dot.y, radius * (3.5 + pulse), 0, Math.PI * 2);
-        ctx.fillStyle = rgba(color, 0.7);
+        ctx.arc(dot.x, dot.y, radius * (1.5 + pulse), 0, Math.PI * 2);
+        ctx.fillStyle = rgba(color, 0.6);
         ctx.fill();
         ctx.closePath();
       }
@@ -108,10 +108,8 @@ function animate() {
     // Base dot
     const color = isActive && dot.colorData ? rgba(dot.colorData, 1) : defaultColor;
     const size = isActive && dot.colorData ? radius * 2 : radius;
-    const blur = isActive && dot.colorData ? "blur(2px)" : "none";
   
     ctx.beginPath();
-    ctx.filter = blur;
     ctx.arc(dot.x, dot.y, size, 0, Math.PI * 2);
     ctx.fillStyle = color;
     ctx.fill();
