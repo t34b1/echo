@@ -5,7 +5,6 @@ html, body {
   padding: 0;
   overflow: hidden;
   font-family: 'Baskervville', serif;
-
 }
 
 canvas.starfield {
@@ -23,7 +22,6 @@ canvas.starfield {
 
 }
 
-
 .baskervville-regular {
   font-family: "Baskervville", serif;
   font-weight: 400;
@@ -37,6 +35,22 @@ canvas.starfield {
 }
 
 /* ----------------------------------Base styles (mobile)---------------------------------- */
+
+main {
+    padding: 52px 16px;
+    box-sizing: border-box;
+  }
+
+h1 {
+    font-size: 36px;
+}
+h2 {
+    font-size: 32px;
+}
+
+h3 {
+    font-size: 28px;
+}
 
 p {
   font-size: 20px;
@@ -54,20 +68,26 @@ span.title {
   letter-spacing: -.05em;
 }
 
-  
-main {
-  padding: 52px 16px;
-  box-sizing: border-box;
+span.small {
+    font-size: 16px;
 }
 
+  
+
+
 button {
+  font-size: inherit;
   font-family: inherit;
   text-decoration: none;
   color: inherit;
+  height: 44px;
+  background-color: inherit;
+  border-radius: 4px;
+  border: 1px solid black;
+  padding: 0px 20px;
 }
 
 button.cta {
-  border: 1px solid black;
   border-radius: 4px;
 }
 
@@ -81,13 +101,44 @@ button.cta {
   height: 54px;
 }
 
+textarea {
+    border-radius: 2px;
+    font-family: inherit;
+    resize: none; 
+    overflow: hidden;
+    height: auto;
+}
+
+textarea.new {
+    font-size: 48px;
+    transition: height 0.3s ease;
+}
+
+textarea::placeholder {
+    opacity: .25;
+}
 /* ----------------------------------Tablet and up---------------------------------- */
 
 @media (min-width: 600px) {
+    span.title {
+        font-size: 72px;
+    
+      }
   
 }
 
 /* ----------------------------------Desktop and up---------------------------------- */
 @media (min-width: 1024px) {
  
+    main {
+        padding: 60px;
+        box-sizing: border-box;
+      }
+
+
+    span.title {
+        font-size: 84px;
+      
+      }
+
 }

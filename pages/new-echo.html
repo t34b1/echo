@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8" />
+
+<style>
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100vh;
+    height: 100dvh;
+    width: 100vw;
+  }
+
+  .tags {
+    margin: 8px 0px;
+    height: 44px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: scroll;
+  }
+  .tag-button {
+    height: 36px;
+    width: 36px;
+    min-width: 36px;
+    background-color: #ECECEC;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .tag-button img {
+    width: 16px;
+    height: auto;
+  }
+  .options {
+    margin: 8px 0px;
+    height: 44px;
+    display: flex;
+    justify-content: space-between;
+    background: pink;
+  }
+
+  .options .text {
+    display: flex;
+    gap: 20px;
+    height: 100%;
+
+  }
+
+  .options > .text > div {
+    border-radius: 50px;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: yellow;
+    max-height: 100%;
+  }
+  
+  .tag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    font-family: 'Helvetica', serif;
+    font-size: 12px;
+    background-color: #ECECEC;
+    border-radius: 50px;
+    box-sizing: border-box;
+  }
+ 
+  
+</style>
+<link rel="stylesheet" href = "../styles/styles.css">
+</head>
+<body>
+  <main>
+    <p>What stayed with you today?</p>
+    <textarea placeholder="The smell of oranges on the bus home" class = "new"></textarea>  
+    <div class = "tags">
+      <div class = "tag-button">
+        <img src = "../images/tags.svg">
+      </div>
+    </div> 
+    <div class = "options">
+      <div class = "text">
+        <div>Aa</div>
+        <div>Aa</div>
+      </div>
+      <button class = "release">Release</button>
+
+    </div>
+  </main>
+  <canvas class="starfield"></canvas>
+  <script src = "../scripts/main-new-echo.js" defer></script>
+
+</body>
+</html>
